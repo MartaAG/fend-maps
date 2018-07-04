@@ -1,0 +1,32 @@
+[
+        {
+          "key": "key-kamppi",
+          "title": "Kamppi shopping center",
+          "name": "Kamppi",
+          "position": { "lat": 60.1693, "lng": 24.9335 }
+        },
+        {
+          "key": "key-university",
+          "title": "University of Helsinki",
+          "name": "University",
+          "position": { "lat": 60.1683, "lng": 24.949 }
+        },
+        {
+          "key": "key-stockmann",
+          "title": "Stockmann shopping center",
+          "name": "Stockmann",
+          "position": { "lat": 60.1683, "lng": 24.9422 }
+        },
+        {
+          "key": "key-library",
+          "title": "Library of Helsinki",
+          "name": "Library",
+          "position": { "lat": 60.1703, "lng": 24.9503 }
+        },
+        {
+          "key": "key-design-museum",
+          "title": "Museum of Design",
+          "name": "Museum of Design",
+          "position": { "lat": 60.1578, "lng": 24.9411 }
+        }
+]
