@@ -9,7 +9,8 @@ class FilterLocations extends Component {
 		this.state = {
 			query: '',
 			filteredLocations: dataLocations,
-			filteredMarkers: []
+			filteredMarkers: [],
+			currentMarker: {}
 		};
 	}
 
@@ -75,7 +76,7 @@ class FilterLocations extends Component {
 		)
 	}
 
-	manageAnimationMarker = (location) => {
+	manageClickedMarker = (location) => {
 		/* Manage the animation of the markers
 		 * when clicking on the list item
 		 */
@@ -86,6 +87,9 @@ class FilterLocations extends Component {
 		setTimeout(function () {
 			controlledThis.removeAnimationMarker()
 		}, 1250);
+
+		this.getCurrentMarker(location);
+		this.props.openInfoWindow(this.state.currentMarker);
 	}
 
 	removeAnimationMarker = () => {
@@ -101,6 +105,18 @@ class FilterLocations extends Component {
 			filteredMarker.id === location.key &&
 				filteredMarker.setAnimation(
 					window.google.maps.Animation.BOUNCE)
+		);
+	}
+
+	getCurrentMarker = (location) => {
+		/* Get the marker clicked
+		 * to give the good info in the InfoWindow
+		 */
+		this.state.filteredMarkers.map(filteredMarker =>
+			filteredMarker.id === location.key &&
+				this.setState({
+					currentMarker: filteredMarker
+				})
 		);
 	}
 
@@ -136,7 +152,7 @@ class FilterLocations extends Component {
 								className="location-item"
 								key={location.key}
 								onClick={() => 
-									this.manageAnimationMarker(location)}
+									this.manageClickedMarker(location)}
 							>
 								{location.title}
 							</li>

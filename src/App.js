@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import * as dataLocations from './locations.json';
 import FilterLocations from './FilterLocations';
+import InfoWindow from './InfoWindow';
 
 class App extends Component {
   constructor(props) {
@@ -9,8 +10,8 @@ class App extends Component {
     this.state = {
       locations: dataLocations,
       map: '',
-      infoWindow: '',
-      markers: []
+      markers: [],
+      infoWindowIsOpen: false
     };
   }
 
@@ -23,8 +24,6 @@ class App extends Component {
     let controlledThis = this;
     const { locations, markers } = this.state;
 
-    let infoWindow = new window.google.maps.InfoWindow();
-
     /* Define the map */
     let map = new window.google.maps.Map(document.getElementById('map'), {
       zoom: 13,
@@ -33,8 +32,7 @@ class App extends Component {
 
     /* Keep state in sync */
     this.setState({
-      map,
-      infoWindow
+      map
     });
 
     /* Create a marker for each location in the locations.json file */
@@ -58,23 +56,15 @@ class App extends Component {
 
       /* Open infoWindow when click on the marker */
       marker.addListener('click', function () {
-        controlledThis.displayInfoWindow(marker);
+        controlledThis.openInfoWindow(marker);
       });
     }
   }
 
-  displayInfoWindow(marker) {
-    const { map, infoWindow } = this.state;
-
-    if (infoWindow.marker !== marker) {
-      infoWindow.marker = marker;
-      infoWindow.setContent(`<div>${marker.title}</div>`);
-      infoWindow.open(map, marker);
-
-      infoWindow.addListener('closeclick', function () {
-        infoWindow.setMarker = null;
-      });
-    }
+  openInfoWindow = (marker) => {
+    this.setState({
+      infoWindowIsOpen: true
+    });
   }
 
   render() {
@@ -83,7 +73,14 @@ class App extends Component {
         <FilterLocations
           locationsList={this.state.locations}
           markers={this.state.markers}
+          openInfoWindow={this.openInfoWindow}
         />
+
+        {
+          this.state.infoWindowIsOpen &&
+          <InfoWindow />
+        }
+        
         <div id="map"></div>
       </div>
     );
