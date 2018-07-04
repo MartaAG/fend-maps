@@ -11,7 +11,8 @@ class App extends Component {
       locations: dataLocations,
       map: '',
       markers: [],
-      infoWindowIsOpen: false
+      infoWindowIsOpen: false,
+      currentMarker: {}
     };
   }
 
@@ -63,7 +64,8 @@ class App extends Component {
 
   openInfoWindow = (marker) => {
     this.setState({
-      infoWindowIsOpen: true
+      infoWindowIsOpen: true,
+      currentMarker: marker
     });
   }
 

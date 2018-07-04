@@ -88,8 +88,16 @@ class FilterLocations extends Component {
 			controlledThis.removeAnimationMarker()
 		}, 1250);
 
+		/* Get the current marker
+		 * Open the Info Winfow accordingly 
+		 */
 		this.getCurrentMarker(location);
-		this.props.openInfoWindow(this.state.currentMarker);
+
+		setTimeout(function () {
+			controlledThis.props.openInfoWindow(
+				controlledThis.state.currentMarker
+			);
+		}, 1)
 	}
 
 	removeAnimationMarker = () => {
