@@ -12,6 +12,7 @@ class FilterLocations extends Component {
 		this.setState({
 			query
 		});
+		this.props.displayFilteredLocations(query);
 	}
 
 	render () {
