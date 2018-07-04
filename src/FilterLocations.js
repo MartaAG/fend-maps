@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import escapeRegExp from 'escape-string-regexp';
 
+import * as dataLocations from './locations.json';
+
 class FilterLocations extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			query: ''
+			query: '',
+			filteredLocations: dataLocations
 		};
 	}
 
@@ -13,22 +16,28 @@ class FilterLocations extends Component {
 		this.setState({
 			query
 		});
+		this.handleDisplayedLocations(query);
+	}
+
+	handleDisplayedLocations = (query) => {
+		let filtered;
+		if (query) {
+			const match = new RegExp(escapeRegExp(query), 'i');
+			filtered = this.props.locationsList.filter(location =>
+				match.test(location.title)
+			);
+			this.setState({
+				filteredLocations: filtered
+			});
+		} else {
+			this.setState({
+				filteredLocations: this.props.locationsList
+			});
+		}
 	}
 
 	render () {
-		const { query } = this.state;
-		const { locationsList } = this.props;
-
-		/* Filter the array of locations to display */
-		let filteredLocations;
-		if (query) {
-			const match = new RegExp(escapeRegExp(query), 'i');
-			filteredLocations = locationsList.filter(location =>
-				match.test(location.title)
-			);
-		} else {
-			filteredLocations = locationsList;
-		}
+		const { query, filteredLocations } = this.state;
 
 		return (
 			<aside className="list-box">
