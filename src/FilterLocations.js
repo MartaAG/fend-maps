@@ -13,8 +13,17 @@ class FilterLocations extends Component {
 		};
 	}
 
+	componentDidMount() {
+		/* Set the filteredMarkers state to the value of the props */
+		this.setState({
+			filteredMarkers: this.props.markers
+		});
+	}
+
 	updateQuery = (query) => {
-		let controlledThis = this;
+		/* Update the visible query
+		 * manage the sync of the different state arrays
+		 */
 		this.setState({
 			query
 		});
@@ -60,9 +69,39 @@ class FilterLocations extends Component {
 	}
 
 	handleMarkersVisibility = (marker) => {
+		/* Make the matching markers visible on the map */
 		this.state.filteredMarkers.map(filteredMarker =>
 			filteredMarker.id === marker.id && marker.setVisible(true)
 		)
+	}
+
+	manageAnimationMarker = (location) => {
+		/* Manage the animation of the markers
+		 * when clicking on the list item
+		 */
+		let controlledThis = this;
+
+		this.removeAnimationMarker();
+		this.addAnimationMarker(location);
+		setTimeout(function () {
+			controlledThis.removeAnimationMarker()
+		}, 1250);
+	}
+
+	removeAnimationMarker = () => {
+		/* Remove all the animations */
+		this.state.filteredMarkers.map(filteredMarker =>
+			filteredMarker.setAnimation(null)
+		)
+	}
+
+	addAnimationMarker = (location) => {
+		/* Add animation to the active marker */
+		this.state.filteredMarkers.map(filteredMarker =>
+			filteredMarker.id === location.key &&
+				filteredMarker.setAnimation(
+					window.google.maps.Animation.BOUNCE)
+		);
 	}
 
 	render () {
@@ -96,6 +135,8 @@ class FilterLocations extends Component {
 							<li
 								className="location-item"
 								key={location.key}
+								onClick={() => 
+									this.manageAnimationMarker(location)}
 							>
 								{location.title}
 							</li>
