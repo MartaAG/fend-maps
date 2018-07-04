@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import * as dataLocations from './locations.json';
+import FilterLocations from './FilterLocations';
 
 class App extends Component {
   constructor(props) {
@@ -75,6 +76,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <FilterLocations />
         <div id="map"></div>
       </div>
     );
