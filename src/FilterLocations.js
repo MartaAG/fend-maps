@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import escapeRegExp from 'escape-string-regexp';
 
 class FilterLocations extends Component {
 	constructor(props) {
@@ -12,11 +13,22 @@ class FilterLocations extends Component {
 		this.setState({
 			query
 		});
-		this.props.displayFilteredLocations(query);
 	}
 
 	render () {
 		const { query } = this.state;
+		const { locationsList } = this.props;
+
+		/* Filter the array of locations to display */
+		let filteredLocations;
+		if (query) {
+			const match = new RegExp(escapeRegExp(query), 'i');
+			filteredLocations = locationsList.filter(location =>
+				match.test(location.title)
+			);
+		} else {
+			filteredLocations = locationsList;
+		}
 
 		return (
 			<aside className="list-box">
@@ -39,6 +51,19 @@ class FilterLocations extends Component {
 							this.updateQuery(event.target.value)}
 					/>
 				</form>
+
+				<ul className="locations-list">
+					{
+						filteredLocations.map(location => (
+							<li
+								className="location-item"
+								key={location.key}
+							>
+								{location.title}
+							</li>
+						))
+					}
+				</ul>
 			</aside>
 		);
 	}

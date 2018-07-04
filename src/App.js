@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import escapeRegExp from 'escape-string-regexp';
 
 import * as dataLocations from './locations.json';
 import FilterLocations from './FilterLocations';
@@ -17,24 +16,6 @@ class App extends Component {
   componentDidMount() {
     window.initMap = this.initMap;
     loadJS('https://maps.googleapis.com/maps/api/js?key=AIzaSyB_AnvKY1bA7EDGBQVxGF5EJMeu2MruYPM&callback=initMap');
-  }
-
-  displayFilteredLocations = (query) => {
-    let filteredLocations;
-
-    if (query) {
-      const match = new RegExp(escapeRegExp(query), 'i');
-      filteredLocations = this.state.locations.filter((location) =>
-        match.test(location.title)
-      )
-      this.setState({
-        locations: filteredLocations
-      });
-    } else {
-      this.setState({
-        locations: dataLocations
-      });
-    }
   }
 
   initMap = () => {
@@ -96,7 +77,7 @@ class App extends Component {
     return (
       <div className="App">
         <FilterLocations
-          displayFilteredLocations={this.displayFilteredLocations}
+          locationsList={this.state.locations}
         />
         <div id="map"></div>
       </div>
