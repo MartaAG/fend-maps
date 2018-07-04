@@ -8,9 +8,15 @@ class FilterLocations extends Component {
 		};
 	}
 
+	updateQuery = (query) => {
+		this.setState({
+			query
+		});
+	}
+
 	render () {
 		const { query } = this.state;
-		
+
 		return (
 			<aside className="list-box">
 				<form
@@ -28,6 +34,8 @@ class FilterLocations extends Component {
 						type="text"
 						placeholder="Filter Locations..."
 						value={query}
+						onChange={(event) => 
+							this.updateQuery(event.target.value)}
 					/>
 				</form>
 			</aside>
