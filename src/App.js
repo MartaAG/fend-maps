@@ -80,7 +80,9 @@ class App extends Component {
 
         {
           this.state.infoWindowIsOpen &&
-          <InfoWindow />
+          <InfoWindow
+            currentMarker={this.state.currentMarker}
+          />
         }
         
         <div id="map"></div>
