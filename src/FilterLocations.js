@@ -23,15 +23,19 @@ class FilterLocations extends Component {
 
 	handleDisplayedLocations = (query) => {
 		/* Manage the sync of locations */
+		let controlledThis = this;
 		let filtLocations;
 		let filtMarkers;
 
 		if (query) {
 			const match = new RegExp(escapeRegExp(query), 'i');
+
+			/* Add location to the array if its title match the query */
 			filtLocations = this.props.locationsList.filter(location =>
 				match.test(location.title)
 			);
 
+			/* Add marker to the array if its title match the query */
 			filtMarkers = this.props.markers.filter(marker =>
 				match.test(marker.title)
 			);
@@ -46,6 +50,19 @@ class FilterLocations extends Component {
 				filteredMarkers: this.props.markers
 			});
 		}
+
+		/* Display the markers on the map accordingly to the state */
+		this.props.markers.map(marker => marker.setVisible(false));
+		setTimeout(function () {
+			controlledThis.props.markers.map(marker =>
+				controlledThis.handleMarkersVisibility(marker))
+		}, 1)
+	}
+
+	handleMarkersVisibility = (marker) => {
+		this.state.filteredMarkers.map(filteredMarker =>
+			filteredMarker.id === marker.id && marker.setVisible(true)
+		)
 	}
 
 	render () {
