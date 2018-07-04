@@ -8,11 +8,13 @@ class FilterLocations extends Component {
 		super(props);
 		this.state = {
 			query: '',
-			filteredLocations: dataLocations
+			filteredLocations: dataLocations,
+			filteredMarkers: []
 		};
 	}
 
 	updateQuery = (query) => {
+		let controlledThis = this;
 		this.setState({
 			query
 		});
@@ -20,18 +22,28 @@ class FilterLocations extends Component {
 	}
 
 	handleDisplayedLocations = (query) => {
-		let filtered;
+		/* Manage the sync of locations */
+		let filtLocations;
+		let filtMarkers;
+
 		if (query) {
 			const match = new RegExp(escapeRegExp(query), 'i');
-			filtered = this.props.locationsList.filter(location =>
+			filtLocations = this.props.locationsList.filter(location =>
 				match.test(location.title)
 			);
+
+			filtMarkers = this.props.markers.filter(marker =>
+				match.test(marker.title)
+			);
+
 			this.setState({
-				filteredLocations: filtered
+				filteredLocations: filtLocations,
+				filteredMarkers: filtMarkers
 			});
 		} else {
 			this.setState({
-				filteredLocations: this.props.locationsList
+				filteredLocations: this.props.locationsList,
+				filteredMarkers: this.props.markers
 			});
 		}
 	}

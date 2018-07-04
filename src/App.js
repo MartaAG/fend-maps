@@ -9,7 +9,8 @@ class App extends Component {
     this.state = {
       locations: dataLocations,
       map: '',
-      infoWindow: ''
+      infoWindow: '',
+      markers: []
     };
   }
 
@@ -20,7 +21,7 @@ class App extends Component {
 
   initMap = () => {
     let controlledThis = this;
-    const { locations } = this.state;
+    const { locations, markers } = this.state;
 
     let infoWindow = new window.google.maps.InfoWindow();
 
@@ -52,6 +53,9 @@ class App extends Component {
         id: id
       });
 
+      /* Get those markers into the state */
+      markers.push(marker);
+
       /* Open infoWindow when click on the marker */
       marker.addListener('click', function () {
         controlledThis.displayInfoWindow(marker);
@@ -78,6 +82,7 @@ class App extends Component {
       <div className="App">
         <FilterLocations
           locationsList={this.state.locations}
+          markers={this.state.markers}
         />
         <div id="map"></div>
       </div>
