@@ -26,6 +26,14 @@ class App extends Component {
       map: map,
       title: 'Helsinki Cnter'
     });
+
+    let infoWindow = new window.google.maps.InfoWindow({
+      content: 'display content'
+    });
+
+    marker.addListener('click', function () {
+      infoWindow.open(map, marker);
+    });
   }
 
   render() {
