@@ -11,7 +11,7 @@ class FilterLocations extends Component {
 			filteredLocations: dataLocations,
 			filteredMarkers: [],
 			currentMarker: {},
-			listIsOpen: false
+			listIsOpen: true
 		};
 	}
 
@@ -161,6 +161,7 @@ class FilterLocations extends Component {
 
 					<input
 						className="list-input"
+						aria-labelledby="filter"
 						type="text"
 						placeholder="Filter Locations..."
 						value={query}
@@ -176,6 +177,7 @@ class FilterLocations extends Component {
 						filteredLocations.map(location => (
 							<li
 								tabIndex={0}
+								role="button"
 								className="location-item"
 								key={location.key}
 								onClick={() => 
