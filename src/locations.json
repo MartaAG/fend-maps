@@ -19,14 +19,38 @@
         },
         {
           "key": "key-library",
-          "title": "Library of Helsinki",
+          "title": "National Library of Finland",
           "name": "Library",
-          "position": { "lat": 60.1703, "lng": 24.9503 }
+          "position": { "lat": 60.1702, "lng": 24.9502 }
         },
         {
-          "key": "key-design-museum",
-          "title": "Museum of Design",
-          "name": "Museum of Design",
-          "position": { "lat": 60.1578, "lng": 24.9411 }
+          "key": "key-cathedral",
+          "title": "Helsinki Cathedral",
+          "name": "Cathedral",
+          "position": { "lat": 60.1702, "lng": 24.9522 }
+        },
+        {
+          "key": "key-south-harbour",
+          "title": "South Harbour, Helsinki",
+          "name": "South Harbour",
+          "position": { "lat": 60.1647, "lng": 24.9583 }
+        },
+        {
+          "key": "key-central-station",
+          "title": "Helsinki Central Station",
+          "name": "Central Station",
+          "position": { "lat": 60.1719, "lng": 24.9413 }
+        },
+        {
+          "key": "key-ice-hall",
+          "title": "Helsinki Ice Hall",
+          "name": "Ice Hall",
+          "position": { "lat": 60.1891, "lng": 24.9222 }
+        },
+        {
+          "key": "key-hartwall-arena",
+          "title": "Hartwall Arena",
+          "name": "Hartwall Arena",
+          "position": { "lat": 60.2057, "lng": 24.9288 }
         }
 ]
