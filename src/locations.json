@@ -1,7 +1,7 @@
 [
         {
           "key": "key-kamppi",
-          "title": "Kamppi shopping center",
+          "title": "Kamppi",
           "name": "Kamppi",
           "position": { "lat": 60.1693, "lng": 24.9335 }
         },
@@ -13,7 +13,7 @@
         },
         {
           "key": "key-stockmann",
-          "title": "Stockmann shopping center",
+          "title": "Stockmann",
           "name": "Stockmann",
           "position": { "lat": 60.1683, "lng": 24.9422 }
         },

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import fetchJsonp from 'fetch-jsonp';
 
 import * as dataLocations from './locations.json';
 import FilterLocations from './FilterLocations';
@@ -67,6 +68,28 @@ class App extends Component {
       infoWindowIsOpen: true,
       currentMarker: marker
     });
+
+    this.getInfos(marker);
+  }
+
+  getInfos = (marker) => {
+    /* Get the good URL */
+    let place = marker.title;
+    let srcUrl = 'https://en.wikipedia.org/w/api.php?action=query&titles=' +
+    place +
+    '&prop=revisions&rvprop=content&format=json&formatversion=2';
+    srcUrl = srcUrl.replace(/ /g, '%20');
+    
+    fetchJsonp(srcUrl)
+      .then(function(response) {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error(
+          `Network response was not ok: ${response.statustext}`);
+      }).then(function (data) {
+        console.log(data);
+      });
   }
 
   render() {
