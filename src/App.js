@@ -110,7 +110,10 @@ class App extends Component {
           infoContent: pageContent
         });
       }).catch(function (error) {
-        console.log('Parsing failed', error);
+        let pageError = 'Parsing failed ' + error;
+        controlledThis.setState({
+          infoContent: pageError
+        });
       })
   }
 

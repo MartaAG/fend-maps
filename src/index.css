@@ -92,11 +92,6 @@ body,
 	border-radius: 2px 2px 0 0;
 }
 
-.close-btn {
-	font-size: 2em;
-	margin: 0 0 0 185px;
-}
-
 .info-window-box h2 {
 	border-bottom: 2px solid #bbb;
 	padding: 0 0 5px 0;
