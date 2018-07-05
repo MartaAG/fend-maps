@@ -147,7 +147,7 @@ class FilterLocations extends Component {
 		const { query, filteredLocations, listIsOpen } = this.state;
 
 		return (
-			<aside className="list-box">
+			<section className="list-box">
 				<form
 					className="list-form"
 					onSubmit={(event) => event.preventDefault()}
@@ -175,9 +175,12 @@ class FilterLocations extends Component {
 					{
 						filteredLocations.map(location => (
 							<li
+								tabIndex={0}
 								className="location-item"
 								key={location.key}
 								onClick={() => 
+									this.manageClickedMarker(location)}
+								onKeyPress={() => 
 									this.manageClickedMarker(location)}
 							>
 								{location.title}
@@ -186,7 +189,7 @@ class FilterLocations extends Component {
 					}
 				</ul>
 				}
-			</aside>
+			</section>
 		);
 	}
 }

@@ -134,7 +134,7 @@ class App extends Component {
           />
         }
         
-        <div id="map"></div>
+        <div id="map" role="application"></div>
       </div>
     );
   }
