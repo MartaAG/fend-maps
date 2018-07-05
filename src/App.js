@@ -62,6 +62,13 @@ class App extends Component {
         controlledThis.openInfoWindow(marker);
       });
     }
+
+    /* Add the listener to close the infoWindow
+     * when click on the map
+     */
+     map.addListener('click', function () {
+      controlledThis.closeInfoWindow();
+     });
   }
 
   openInfoWindow = (marker) => {
@@ -73,6 +80,13 @@ class App extends Component {
     this.getInfos(marker);
   }
 
+  closeInfoWindow = () => {
+    this.setState({
+      infoWindowIsOpen: false,
+      currentMarker: {}
+    });
+  }
+
   getInfos = (marker) => {
     let controlledThis = this;
     /* Get the good URL */
@@ -81,18 +95,20 @@ class App extends Component {
     place;
     srcUrl = srcUrl.replace(/ /g, '%20');
     
+    /* Fetch from Wikipedia API */
     fetchJsonp(srcUrl)
       .then(function(response) {
         return response.json();
       }).then(function (data) {
+        /* Get the content of the response */
         let pages = data.query.pages;
         let pageId = Object.keys(data.query.pages)[0];
         let pageContent = pages[pageId].extract;
 
+        /* Get the content into the state */
         controlledThis.setState({
           infoContent: pageContent
         });
-        console.log(pageContent);
       }).catch(function (error) {
         console.log('Parsing failed', error);
       })
