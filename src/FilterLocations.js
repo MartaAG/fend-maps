@@ -27,9 +27,23 @@ class FilterLocations extends Component {
 		 * manage the sync of the different state arrays
 		 */
 		this.setState({
-			query
+			query,
+			listIsOpen: true
 		});
+
+		/* Manage list displaying */
+		if (query === '') {
+			this.setState({
+			listIsOpen: false
+		});
+		}
 		this.handleDisplayedLocations(query);
+	}
+
+	toggleListVisibility = () => {
+		this.setState((prevState) => ({
+			listIsOpen: !(prevState.listIsOpen)
+		}));
 	}
 
 	handleDisplayedLocations = (query) => {
@@ -140,6 +154,7 @@ class FilterLocations extends Component {
 				>
 					<button
 						className="list-btn"
+						onClick={() => this.toggleListVisibility()}
 					>
 						List
 					</button>
