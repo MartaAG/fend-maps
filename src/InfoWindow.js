@@ -5,10 +5,11 @@ function InfoWindow(props) {
 
 	return (
 		<aside className="info-window-box">
-			{currentMarker.title}
-			<div>
+			<p className="attribution">Provided by Wikipedia</p>
+			<h2>{currentMarker.title}</h2>
+			<article>
 				{infoContent}
-			</div>
+			</article>
 		</aside>
 	);
 }
