@@ -10,7 +10,8 @@ class FilterLocations extends Component {
 			query: '',
 			filteredLocations: dataLocations,
 			filteredMarkers: [],
-			currentMarker: {}
+			currentMarker: {},
+			listIsOpen: false
 		};
 	}
 
@@ -129,7 +130,7 @@ class FilterLocations extends Component {
 	}
 
 	render () {
-		const { query, filteredLocations } = this.state;
+		const { query, filteredLocations, listIsOpen } = this.state;
 
 		return (
 			<aside className="list-box">
@@ -153,7 +154,9 @@ class FilterLocations extends Component {
 					/>
 				</form>
 
-				<ul className="locations-list">
+				{
+					listIsOpen &&
+					<ul className="locations-list">
 					{
 						filteredLocations.map(location => (
 							<li
@@ -167,6 +170,7 @@ class FilterLocations extends Component {
 						))
 					}
 				</ul>
+				}
 			</aside>
 		);
 	}
