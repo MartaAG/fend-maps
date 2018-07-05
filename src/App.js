@@ -13,7 +13,8 @@ class App extends Component {
       map: '',
       markers: [],
       infoWindowIsOpen: false,
-      currentMarker: {}
+      currentMarker: {},
+      infoContent: ''
     };
   }
 
@@ -73,23 +74,28 @@ class App extends Component {
   }
 
   getInfos = (marker) => {
+    let controlledThis = this;
     /* Get the good URL */
     let place = marker.title;
-    let srcUrl = 'https://en.wikipedia.org/w/api.php?action=query&titles=' +
-    place +
-    '&prop=revisions&rvprop=content&format=json&formatversion=2';
+    let srcUrl = 'https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro=&explaintext=&titles=' +
+    place;
     srcUrl = srcUrl.replace(/ /g, '%20');
     
     fetchJsonp(srcUrl)
       .then(function(response) {
-        if (response.ok) {
-          return response.json();
-        }
-        throw new Error(
-          `Network response was not ok: ${response.statustext}`);
+        return response.json();
       }).then(function (data) {
-        console.log(data);
-      });
+        let pages = data.query.pages;
+        let pageId = Object.keys(data.query.pages)[0];
+        let pageContent = pages[pageId].extract;
+
+        controlledThis.setState({
+          infoContent: pageContent
+        });
+        console.log(pageContent);
+      }).catch(function (error) {
+        console.log('Parsing failed', error);
+      })
   }
 
   render() {
@@ -105,6 +111,7 @@ class App extends Component {
           this.state.infoWindowIsOpen &&
           <InfoWindow
             currentMarker={this.state.currentMarker}
+            infoContent={this.state.infoContent}
           />
         }
         

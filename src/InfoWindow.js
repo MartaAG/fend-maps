@@ -1,11 +1,14 @@
 import React from 'react';
 
 function InfoWindow(props) {
-	const { currentMarker } = props;
+	const { currentMarker, infoContent } = props;
 
 	return (
 		<aside className="info-window-box">
 			{currentMarker.title}
+			<div>
+				{infoContent}
+			</div>
 		</aside>
 	);
 }
